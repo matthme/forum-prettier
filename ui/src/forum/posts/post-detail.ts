@@ -84,16 +84,31 @@ export class PostDetail extends LitElement {
     if (!maybeRecord) return html`<span>The requested post was not found.</span>`;
 
     if (this._editing) {
-    	return html`<edit-post
-    	  .originalPostHash=${this.postHash}
-    	  .currentRecord=${maybeRecord}
-    	  @post-updated=${async () => {
-    	    this._editing = false;
-    	    await this._fetchRecord.run();
-    	  } }
-    	  @edit-canceled=${() => { this._editing = false; } }
-    	  style="display: flex; flex: 1;"
-    	></edit-post>`;
+    	return html`
+      <div style="
+        display: flex;
+        flex:1;
+        flex-direction: column;
+        align-items: center;
+        border: 1px solid #b3bdd6;
+        border-radius: 10px;
+        padding: 30px 20px 20px 20px;
+        position: relative;
+        margin-top: 20px;
+        margin-bottom: 16px;
+      ">
+        <span style="position: absolute; top: -25px; left: 10px; font-size: 18px; color: #b3bdd6;">Edit</span>
+        <edit-post
+          .originalPostHash=${this.postHash}
+          .currentRecord=${maybeRecord}
+          @post-updated=${async () => {
+            this._editing = false;
+            await this._fetchRecord.run();
+          } }
+          @edit-canceled=${() => { this._editing = false; } }
+          style="display: flex; flex: 1; width: 95%;"
+        ></edit-post>
+      </div>`;
     }
 
     return this.renderDetail(maybeRecord);

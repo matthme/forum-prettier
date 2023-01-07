@@ -17,20 +17,20 @@ export class EditPost extends LitElement {
 
   @consume({ context: clientContext })
   client!: AppAgentClient;
-  
+
   @property({
       hasChanged: (newVal: ActionHash, oldVal: ActionHash) => newVal?.toString() !== oldVal?.toString()
   })
   originalPostHash!: ActionHash;
 
-  
+
   @property()
   currentRecord!: Record;
- 
+
   get currentPost() {
     return decode((this.currentRecord.entry as any).Present.entry) as Post;
   }
- 
+
   @state()
   _title!: string;
 
@@ -41,7 +41,7 @@ export class EditPost extends LitElement {
   isPostValid() {
     return true && this._title !== undefined && this._content !== undefined;
   }
-  
+
   connectedCallback() {
     super.connectedCallback();
     this._title = this.currentPost.title;
@@ -49,7 +49,7 @@ export class EditPost extends LitElement {
   }
 
   async updatePost() {
-    const post: Post = { 
+    const post: Post = {
       title: this._title!,
       content: this._content!,
     };
@@ -66,7 +66,7 @@ export class EditPost extends LitElement {
           updated_post: post
         },
       });
-  
+
       this.dispatchEvent(new CustomEvent('post-updated', {
         composed: true,
         bubbles: true,
@@ -88,21 +88,59 @@ export class EditPost extends LitElement {
       <mwc-snackbar id="update-error" leading>
       </mwc-snackbar>
 
-      <div style="display: flex; flex-direction: column">
-        <span style="font-size: 18px">Edit Post</span>
-          <div style="margin-bottom: 16px">
-          <mwc-textfield outlined label="Title" .value=${ this._title } @input=${(e: CustomEvent) => { this._title = (e.target as any).value; } } required></mwc-textfield>    
-          </div>
-
-          <div style="margin-bottom: 16px">
-          <mwc-textarea outlined label="Content" .value=${ this._content } @input=${(e: CustomEvent) => { this._content = (e.target as any).value;} } required></mwc-textarea>    
-          </div>
-
-
-
-        <div style="display: flex; flex-direction: row">
-          <mwc-button
+      <div style="display: flex; flex-direction: column; flex: 1; align-items: center;">
+        <div style="margin-bottom: 16px; width: 100%;">
+          <mwc-textfield
+            style="
+                --mdc-theme-primary: #b3bdd6;
+                width: 100%;
+                --mdc-theme-error: #9d3437;
+                --mdc-text-field-ink-color: #b3bdd6;
+                --mdc-text-field-outlined-idle-border-color: #606572;
+                --mdc-text-field-outlined-hover-border-color: #b3bdd6;
+                --mdc-text-field-label-ink-color: #b3bdd6;
+                --mdc-text-field-filled-border-radius: 10px 10px;
+              "
             outlined
+            label="Title"
+            .value=${ this._title }
+            @input=${(e: CustomEvent) => { this._title = (e.target as any).value; } }
+            required
+          ></mwc-textfield>
+        </div>
+
+        <div style="margin-bottom: 16px; width: 100%;">
+          <mwc-textarea
+            style="
+                --mdc-theme-primary: #b3bdd6;
+                width: 100%;
+                --mdc-theme-error: #9d3437;
+                --mdc-text-field-ink-color: #b3bdd6;
+                --mdc-text-field-outlined-idle-border-color: #606572;
+                --mdc-text-field-outlined-hover-border-color: #b3bdd6;
+                --mdc-text-field-label-ink-color: #b3bdd6;
+                --mdc-text-field-filled-border-radius: 10px 10px;
+                height: 200px;
+            "
+            outlined
+            label="Content"
+            .value=${ this._content }
+            @input=${(e: CustomEvent) => { this._content = (e.target as any).value;} }
+            required
+          ></mwc-textarea>
+        </div>
+
+
+
+        <div style="display: flex; flex-direction: row; justify-content: flex-end; width: 100%;">
+          <mwc-button
+            style="
+              --mdc-button-disabled-fill-color: #606572;
+              --mdc-theme-primary: #9d3437;
+              width: 200px;
+              margin-right: 5px;
+            "
+            raised
             label="Cancel"
             @click=${() => this.dispatchEvent(new CustomEvent('edit-canceled', {
               bubbles: true,
@@ -110,7 +148,12 @@ export class EditPost extends LitElement {
             }))}
             style="flex: 1; margin-right: 16px"
           ></mwc-button>
-          <mwc-button 
+          <mwc-button
+            style="
+              --mdc-button-disabled-fill-color: #606572;
+              --mdc-theme-primary: #3a5599;
+              width: 200px;
+            "
             raised
             label="Save"
             .disabled=${!this.isPostValid()}
