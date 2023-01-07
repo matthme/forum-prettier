@@ -26,7 +26,7 @@ export class AllPosts extends LitElement {
     if (hashes.length === 0) return html`
       <div style="display: flex; flex-direction: column; align-items: center;">
         <span style="width: 100%; font-size: 22px; color: #b3bdd6; text-align: left; margin: 0 0 20px 30px;">Read Posts</span>
-        <span style="color: #9aa3ba; font-size: 22px;">No posts found.</span>
+        <span style="color: #9aa3ba; font-size: 20px;">No posts found.</span>
       </div>
       `;
 
