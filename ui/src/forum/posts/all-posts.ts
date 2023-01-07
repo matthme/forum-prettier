@@ -23,15 +23,19 @@ export class AllPosts extends LitElement {
   }) as Promise<Array<ActionHash>>, () => []);
 
   renderList(hashes: Array<ActionHash>) {
-    if (hashes.length === 0) return html`<span>No posts found.</span>`;
+    if (hashes.length === 0) return html`
+      <div style="display: flex; flex-direction: column; align-items: center;">
+        <span style="width: 100%; font-size: 22px; color: #b3bdd6; text-align: left; margin: 0 0 20px 30px;">Read Posts</span>
+        <span style="color: #9aa3ba; font-size: 22px;">No posts found.</span>
+      </div>
+      `;
 
     return html`
       <div style="display: flex; flex-direction: column; align-items: center;">
-        <span style="width: 100%; font-size: 22px; color: #b3bdd6; text-align: left; margin: 0 0 -7px 15px;">Read Posts</span>
-        <hr style="width: 100%; background-color: #b3bdd6; margin-bottom: 30px; height: 2px; border: none; opacity: 0.2;">
+        <span style="width: 100%; font-size: 22px; color: #b3bdd6; text-align: left; margin: 0 0 20px 30px;">Read Posts</span>
 
         ${hashes.map(hash =>
-          html`<post-detail .postHash=${hash} style="margin-bottom: 16px;" @post-deleted=${() => this._fetchPosts.run()}></post-detail>`
+          html`<post-detail .postHash=${hash} style="margin-bottom: 16px; width: 100%;" @post-deleted=${() => this._fetchPosts.run()}></post-detail>`
         )}
       </div>
     `;

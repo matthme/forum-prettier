@@ -63,8 +63,7 @@ export class CreatePost extends LitElement {
       </mwc-snackbar>
 
       <div style="display: flex; width: 100%; flex-direction: column; align-items: center;">
-        <span style="width: 100%; font-size: 22px; color: #b3bdd6; text-align: left; margin: 0 0 -7px 15px;">Create Post</span>
-        <hr style="width: 100%; background-color: #b3bdd6; margin-bottom: 30px; height: 2px; border: none; opacity: 0.2;">
+        <span style="width: 100%; font-size: 22px; color: #b3bdd6; text-align: left; margin: 0 0 15px 30px;">Create Post</span>
 
           <div style="margin-bottom: 16px; width: 100%;">
             <mwc-textfield
