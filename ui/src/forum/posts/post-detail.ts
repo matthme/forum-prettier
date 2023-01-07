@@ -66,15 +66,15 @@ export class PostDetail extends LitElement {
       <mwc-snackbar id="delete-error" leading>
       </mwc-snackbar>
 
-      <div style="display: flex; flex-direction: column; align-items: flex-start; margin-bottom: 16px; background: #9aa3ba; border-radius: 10px; box-shadow: 1px 1px 2px black; padding: 5px 15px 15px 15px;">
-         <div style="display: flex; flex-direction: row; align-items: center;">
-          <div style="font-size: 1.2em; font-weight: bold;">${ post.title }</div>
+      <div style="display: flex; flex-direction: column; align-items: flex-start; margin-bottom: 16px; background: #9aa3ba; border-radius: 10px; box-shadow: 1px 1px 2px black; padding: 10px 20px 20px 20px;">
+        <div style="display: flex; flex-direction: row; align-items: center; width: 100%; margin-bottom: 12px;">
+          <div style="font-size: 26px; font-weight: bold; text-align: left;">${ post.title }</div>
           <span style="display: flex; flex: 1;"></span>
           <mwc-icon-button style="margin-left: 8px" icon="edit" title="edit" @click=${() => { this._editing = true; } }></mwc-icon-button>
           <mwc-icon-button style="margin-left: 8px" icon="delete" title="delete" @click=${() => this.deletePost()}></mwc-icon-button>
         </div>
-          <div style="white-space: pre-line">${ post.content }</div>
-        </div>
+
+        <div style="width: 100%; text-align: left; font-size: 20px;">${ post.content }</div>
 
       </div>
     `;

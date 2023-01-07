@@ -25,11 +25,11 @@ export class CreatePost extends LitElement {
 
 
   isPostValid() {
-    return true && this._title !== undefined && this._content !== undefined;
+    return true && this._title !== undefined && this._content !== undefined && this._title !== "" && this._content !== "";
   }
 
   async createPost() {
-    const post: Post = { 
+    const post: Post = {
         title: this._title!,
         content: this._content!,
     };
@@ -62,19 +62,57 @@ export class CreatePost extends LitElement {
       <mwc-snackbar id="create-error" leading>
       </mwc-snackbar>
 
-      <div style="display: flex; flex-direction: column">
-        <span style="font-size: 18px">Create Post</span>
+      <div style="display: flex; width: 100%; flex-direction: column; align-items: center;">
+        <span style="width: 100%; font-size: 22px; color: #b3bdd6; text-align: left; margin: 0 0 -7px 15px;">Create Post</span>
+        <hr style="width: 100%; background-color: #b3bdd6; margin-bottom: 30px; height: 2px; border: none; opacity: 0.2;">
 
-          <div style="margin-bottom: 16px">
-            <mwc-textfield outlined label="Title"  @input=${(e: CustomEvent) => { this._title = (e.target as any).value; } } required></mwc-textfield>          
+          <div style="margin-bottom: 16px; width: 100%;">
+            <mwc-textfield
+              style="
+                --mdc-theme-primary: #b3bdd6;
+                width: 100%;
+                --mdc-theme-error: #9d3437;
+                --mdc-text-field-ink-color: #b3bdd6;
+                --mdc-text-field-outlined-idle-border-color: #606572;
+                --mdc-text-field-outlined-hover-border-color: #b3bdd6;
+                --mdc-text-field-label-ink-color: #b3bdd6;
+                --mdc-text-field-filled-border-radius: 10px 10px;
+              "
+              outlined
+              label="Title"
+              @input=${(e: CustomEvent) => { this._title = (e.target as any).value; } }
+              required
+            ></mwc-textfield>
           </div>
-            
-          <div style="margin-bottom: 16px">
-            <mwc-textarea outlined label="Content"  @input=${(e: CustomEvent) => { this._content = (e.target as any).value;} } required></mwc-textarea>          
-          </div>
-            
 
-        <mwc-button 
+          <div style="margin-bottom: 16px; width: 100%;">
+            <mwc-textarea
+              style="
+                --mdc-theme-primary: #b3bdd6;
+                width: 100%;
+                color: #b3bdd6;
+                --mdc-theme-error: #9d3437;
+                --mdc-text-field-ink-color: #b3bdd6;
+                --mdc-text-field-outlined-idle-border-color: #606572;
+                --mdc-text-field-outlined-hover-border-color: #b3bdd6;
+                --mdc-text-field-label-ink-color: #b3bdd6;
+                height: 200px;
+              "
+              outlined
+              label="Content"
+              @input=${(e: CustomEvent) => { this._content = (e.target as any).value;} }
+              required
+            ></mwc-textarea>
+          </div>
+
+
+        <mwc-button
+          style="
+            --mdc-button-disabled-fill-color: #606572;
+            --mdc-theme-primary: #3a5599;
+            width: 200px;
+          "
+          icon="rocket_launch"
           raised
           label="Create Post"
           .disabled=${!this.isPostValid()}

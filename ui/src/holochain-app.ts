@@ -38,10 +38,10 @@ export class HolochainApp extends LitElement {
 
     return html`
       <main>
-        <h1>my-app</h1>
+        <h1 style="color: #b3bdd6; font-size: 50px; margin-bottom: 60px;">Forum</h1>
 
         <div id="content" class="content">
-          <create-post @post-created=${() => this.allPosts?._fetchPosts.run()} style="margin-bottom: 40px;"></create-post>
+          <create-post @post-created=${() => this.allPosts?._fetchPosts.run()} style="margin-bottom: 60px;"></create-post>
           <all-posts id="all-posts" style="margin-bottom: 16px"></all-posts>
         </div>
       </main>
@@ -64,7 +64,7 @@ export class HolochainApp extends LitElement {
 
     main {
       flex-grow: 1;
-      min-width: 800px;
+      width: 800px;
     }
 
     .content {
